@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    container_name: file-manager-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: file-manager-frontend
+    restart: unless-stopped
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
